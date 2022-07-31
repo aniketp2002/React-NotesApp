@@ -1,32 +1,28 @@
-import React, { useState } from "react";
+import { TextareaAutosize } from "@mui/material";
+import React, { useRef, useState } from "react";
 
 import "../cssfiles/textfield.css";
 function Textfield(props) {
- 
-  const [title, settitle] = useState("")
-  const [description, setdescription] = useState("")
-  const data1 = []
-  const titlechng = (event)=>{
+  
+  const titleRef=useRef();
+  const desRef=useRef();
+
+  // const [title, settitle] = useState("")
+  // const [description, setdescription] = useState("")
+  // const titlechng = (event)=>{
     
-    settitle(event.target.value)
-    console.log(title)
-  }
-  const descriptionchng = (event)=>{
-    console.log(event.target.value)
-    setdescription(event.target.value)
-  }
+  //   settitle(event.target.value)
+  //   console.log(title)
+  // }
+  // const descriptionchng = (event)=>{
+  //   console.log(event.target.value)
+  //   setdescription(event.target.value)
+  // }
   const onclck= ()=>{
-    const ele = new Object();
-  ele.name= title;
-  ele.gender = description;
-  data1.push(ele);
-    // data1.push({
-    //   name:title,
-    //   gender:description
-    // })
-    console.log(data1)
-    // props.addfun(data1)
+    props.setdata([...props.data,{name:titleRef.current.value, gender:desRef.current.value}])
+    titleRef.current.value = desRef.current.value = ""
   }
+  console.log(props.data)
   return (
     <div className="container">
       <div className="form-group mt-4 ">
@@ -36,21 +32,23 @@ function Textfield(props) {
         >
           Add task
         </label>
-        <textarea
+        <input
           placeholder="Title"
           className="form-control area1 "
           id="exampleFormControlTextarea1"
           rows={1}
-          value={title}
-          onChange={titlechng}
+          // value={title}
+          // onChange={titlechng}
+          ref={titleRef}
         />
-        <textarea
+        <TextareaAutosize
+          style={{minHeight:"140px"}}
           placeholder="Description"
           className="form-control area2"
           id="exampleFormControlTextarea1"
-          rows={4}
-          value={description}
-          onChange={descriptionchng}
+          // value={description}
+          // onChange={descriptionchng}
+          ref={desRef}
         />
         
       </div>

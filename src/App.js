@@ -10,11 +10,6 @@ function App() {
   
   const [data, setdata] = useState([])
 
-  const addfun = (inp)=>{
-    
-    
-    setdata(inp)
-  }
   const chng = () =>{
     if(mode==="light"){
       setmode("dark")
@@ -26,7 +21,7 @@ function App() {
     <>
 
       <Navbar mode={mode} fun={chng}/>
-      <Textfield addfun={addfun}/>
+      <Textfield setdata={setdata} data={data}/>
       <Showdata item={data}/>
     </>
 
